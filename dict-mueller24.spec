@@ -41,7 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/dictd,%{_sysconfdir}/dictd}
 
 dictprefix=%{_datadir}/dictd/%{dictname}
-echo "# Mueller English-Russian dictionary, 24-th edition (%version)
+echo "# Mueller English-Russian dictionary, 24-th edition (%{version})
 database %{dictname} {
 	data  \"$dictprefix.dict.dz\"
 	index \"$dictprefix.index\"
