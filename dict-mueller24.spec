@@ -7,9 +7,11 @@ Release:	1
 License:	unknown
 Group:		Applications/Dictionaries
 Source0:	http://mueller-dic.chat.ru/Mueller24.tgz
+# Source0-md5:	386d71c149f3f793d3ff064fd4b16c65
 # This one is compressed with szip: http://www.compressconsult.com/szip
 #Source0:	http://www.geocities.com/mueller_dic/Mueller24.tgz
 Source1:	http://www.math.sunysb.edu/~comech/tools/to-dict
+# Source1-md5:	3c1b69c290fb4c06bf3456baf5bf8b97
 URL:		http://mueller-dic.chat.ru/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
