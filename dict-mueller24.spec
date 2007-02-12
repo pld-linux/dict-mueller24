@@ -1,6 +1,6 @@
 %define		dictname mueller24
 Summary:	English-Russian dictionary for dictd
-Summary(pl.UTF-8):   Słownik angielsko-rosyjski dla dictd
+Summary(pl.UTF-8):	Słownik angielsko-rosyjski dla dictd
 Name:		dict-%{dictname}
 Version:	1.6
 Release:	1
