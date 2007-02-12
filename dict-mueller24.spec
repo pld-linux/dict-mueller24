@@ -1,6 +1,6 @@
 %define		dictname mueller24
 Summary:	English-Russian dictionary for dictd
-Summary(pl):	S≥ownik angielsko-rosyjski dla dictd
+Summary(pl.UTF-8):   S≈Çownik angielsko-rosyjski dla dictd
 Name:		dict-%{dictname}
 Version:	1.6
 Release:	1
@@ -23,8 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Electronic version of 24th edition of English-Russian dictionary by V.
 K. Mueller.
 
-%description -l pl
-Elektroniczna wersja 24. wydania s≥ownika angielsko rosyjskiego V. K.
+%description -l pl.UTF-8
+Elektroniczna wersja 24. wydania s≈Çownika angielsko rosyjskiego V. K.
 Muellera.
 
 %prep
