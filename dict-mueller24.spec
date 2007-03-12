@@ -3,7 +3,7 @@ Summary:	English-Russian dictionary for dictd
 Summary(pl.UTF-8):	Słownik angielsko-rosyjski dla dictd
 Name:		dict-%{dictname}
 Version:	1.6
-Release:	1
+Release:	2
 License:	unknown
 Group:		Applications/Dictionaries
 Source0:	http://mueller-dic.chat.ru/Mueller24.tgz
@@ -15,6 +15,7 @@ Source1:	http://www.math.sunysb.edu/~comech/tools/to-dict
 URL:		http://mueller-dic.chat.ru/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	%{_sysconfdir}/dictd
 Requires:	dictd
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -29,10 +30,10 @@ Muellera.
 
 %prep
 %setup -q -c
-
-%build
 cp %{SOURCE1} .
 chmod +x ./to-dict
+
+%build
 ./to-dict --src-data usr/local/share/dict/Mueller24.koi mueller24.data
 ./to-dict --data-dict mueller24.data mueller24 && rm -f mueller24.data
 
@@ -52,13 +53,11 @@ mv %{dictname}.* $RPM_BUILD_ROOT%{_datadir}/dictd
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /var/lock/subsys/dictd ]; then
-	/etc/rc.d/init.d/dictd restart 1>&2
-fi
+%service -q dictd restart
 
 %postun
-if [ -f /var/lock/subsys/dictd ]; then
-	/etc/rc.d/init.d/dictd restart 1>&2 || true
+if [ "$1" = 0 ]; then
+	%service -q dictd restart
 fi
 
 %files
