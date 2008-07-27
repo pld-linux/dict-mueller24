@@ -3,7 +3,7 @@ Summary:	English-Russian dictionary for dictd
 Summary(pl.UTF-8):	Słownik angielsko-rosyjski dla dictd
 Name:		dict-%{dictname}
 Version:	1.6
-Release:	2
+Release:	3
 License:	unknown
 Group:		Applications/Dictionaries
 Source0:	http://mueller-dic.chat.ru/Mueller24.tgz
