@@ -3,18 +3,17 @@ Summary:	English-Russian dictionary for dictd
 Summary(pl.UTF-8):	Słownik angielsko-rosyjski dla dictd
 Name:		dict-%{dictname}
 Version:	1.6
-Release:	3
+Release:	4
 License:	unknown
 Group:		Applications/Dictionaries
 Source0:	http://mueller-dic.chat.ru/Mueller24.tgz
 # Source0-md5:	386d71c149f3f793d3ff064fd4b16c65
-# This one is compressed with szip: http://www.compressconsult.com/szip
-#Source0:	http://www.geocities.com/mueller_dic/Mueller24.tgz
-Source1:	http://www.math.sunysb.edu/~comech/tools/to-dict
-# Source1-md5:	3c1b69c290fb4c06bf3456baf5bf8b97
+#Source1:	http://www.math.sunysb.edu/~comech/tools/to-dict
+Source1:	to-dict
 URL:		http://mueller-dic.chat.ru/
 BuildRequires:	dictfmt
 BuildRequires:	dictzip
+BuildRequires:	iconv
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	%{_sysconfdir}/dictd
 Requires:	dictd
@@ -34,8 +33,10 @@ cp %{SOURCE1} .
 chmod +x ./to-dict
 
 %build
-./to-dict --src-data usr/local/share/dict/Mueller24.koi mueller24.data
-./to-dict --data-dict mueller24.data mueller24 && rm -f mueller24.data
+iconv -f koi8-r -t utf-8 usr/local/share/dict/Mueller24.koi >usr/local/share/dict/Mueller24.utf8
+iconv -f koi8-r -t utf-8 usr/local/share/mova/Mueller24_koi.txt >usr/local/share/mova/Mueller24_utf8.txt
+LC_ALL=ru_RU.utf-8 ./to-dict --src-data usr/local/share/dict/Mueller24.utf8 mueller24.data
+LC_ALL=ru_RU.utf-8 ./to-dict --data-dict mueller24.data mueller24 && rm -f mueller24.data
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,6 +64,6 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc usr/local/share/mova/Mueller24.txt
-%lang(ru) %doc usr/local/share/mova/Mueller24_koi.txt
+%lang(ru) %doc usr/local/share/mova/Mueller24_utf8.txt
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dictd/%{dictname}.dictconf
 %{_datadir}/dictd/%{dictname}.*
